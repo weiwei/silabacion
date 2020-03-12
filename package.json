@@ -25,9 +25,9 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "si-la-ba",
+  "name": "silabacion",
   "author": "Joel Wang",
-  "module": "dist/si-la-ba.esm.js",
+  "module": "dist/silabacion.esm.js",
   "devDependencies": {
     "@types/jest": "^25.1.4",
     "husky": "^4.2.3",
