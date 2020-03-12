@@ -1,4 +1,5 @@
-import { Word, syllable2Str } from '../src';
+import { Word } from '../src/syllabize';
+import { syllable2Str } from '../src/util';
 
 const DIPTONGOS = [
   'pai-sa-je',
