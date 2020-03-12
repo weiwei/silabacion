@@ -160,7 +160,7 @@ describe('blah', () => {
     expect(word.syllables.map(syllable2Str)).toEqual(['ex', 'tra']);
   });
 
-  TEST_DATA.map(word => {
+  TEST_DATA.forEach(word => {
     const combined = word.replace(/-/g, '');
     const split = word.split('-');
     it(`${combined} => ${word}`, () => {
@@ -169,7 +169,7 @@ describe('blah', () => {
     });
   });
 
-  DIPTONGOS.map(word => {
+  DIPTONGOS.forEach(word => {
     const combined = word.replace(/-/g, '');
     const split = word.split('-');
     it(`${combined} => ${word}`, () => {
@@ -178,7 +178,7 @@ describe('blah', () => {
     });
   });
 
-  TRIPTONGOS.map(word => {
+  TRIPTONGOS.forEach(word => {
     const combined = word.replace(/-/g, '');
     const split = word.split('-');
     it(`${combined} => ${word}`, () => {
@@ -187,7 +187,7 @@ describe('blah', () => {
     });
   });
 
-  HIATOS.map(word => {
+  HIATOS.forEach(word => {
     const combined = word.replace(/-/g, '');
     const split = word.split('-');
     it(`${combined} => ${word}`, () => {
@@ -196,10 +196,10 @@ describe('blah', () => {
     });
   });
 
-  WITH_H.map(word => {
+  WITH_H.forEach(word => {
     const combined = word.replace(/-/g, '');
     const split = word.split('-');
-    fit(`${combined} => ${word}`, () => {
+    it(`${combined} => ${word}`, () => {
       const word = new Word(combined);
       expect(word.syllables.map(syllable2Str)).toEqual(split);
     });
