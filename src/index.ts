@@ -67,6 +67,13 @@ export const syllable2Str = (syllable: Syllable) => {
   return syllable.onset + syllable.nucleus + syllable.coda;
 };
 
+export enum Stress {
+  Oxytone = 1, // aguda
+  Paroxytone, // llana
+  Proparoxytone, // esdrújula
+  Superproparoxytone, //sobresdrújula
+}
+
 enum Position {
   None,
   atOnset,
@@ -78,12 +85,19 @@ export class Word {
   public word: string;
   public length: number;
   public syllables: Syllable[];
+  public stress: Stress;
+  public rhyme: string;
+  private stressPosition = 0;
+  public tonic: Syllable;
 
   constructor(word: string) {
     this.word = word;
     this.length = word.length;
     this.syllables = [];
     this.toSyllables();
+    this.stress = this.findStress();
+    this.rhyme = this.findRhyme();
+    this.tonic = this.syllables[this.stressPosition];
   }
 
   private toSyllables() {
@@ -217,4 +231,130 @@ export class Word {
       }
     }
   }
+
+  private findStress(): Stress {
+    const numberOfSyllables = this.syllables.length;
+    if (numberOfSyllables === 1) {
+      return Stress.Oxytone;
+    }
+    if (numberOfSyllables > 1) {
+      for (const char of this.syllables[numberOfSyllables - 1].nucleus) {
+        if (ACCENTED_VOWELS.includes(char)) {
+          this.stressPosition = 1;
+          return Stress.Oxytone;
+        }
+      }
+    }
+    if (numberOfSyllables >= 2) {
+      for (const char of this.syllables[numberOfSyllables - 2].nucleus) {
+        if (ACCENTED_VOWELS.includes(char)) {
+          this.stressPosition = 2;
+          return Stress.Paroxytone;
+        }
+      }
+    }
+    if (numberOfSyllables >= 3) {
+      for (const char of this.syllables[numberOfSyllables - 3].nucleus) {
+        if (ACCENTED_VOWELS.includes(char)) {
+          this.stressPosition = 3;
+          return Stress.Proparoxytone;
+        }
+      }
+    }
+    if (numberOfSyllables >= 4) {
+      let index = numberOfSyllables - 4;
+      while (index >= 0) {
+        for (const char of this.syllables[index].nucleus) {
+          if (ACCENTED_VOWELS.includes(char)) {
+            this.stressPosition = numberOfSyllables - index;
+            return Stress.Superproparoxytone;
+          }
+        }
+        index -= 1;
+      }
+    }
+
+    const lastCoda = this.syllables[numberOfSyllables - 1].coda;
+    if (lastCoda !== '' && lastCoda !== 'n' && lastCoda !== 's') {
+      return Stress.Oxytone;
+    }
+    return Stress.Paroxytone;
+  }
+
+  private findRhyme(): string {
+    switch (this.stress) {
+      case Stress.Oxytone: {
+        const lastSyllable = this.syllables[this.syllables.length - 1];
+        return lastSyllable.nucleus + lastSyllable.coda;
+      }
+      case Stress.Paroxytone: {
+        const lastSyllable = this.syllables[this.syllables.length - 1];
+        const nextSyllable = this.syllables[this.syllables.length - 2];
+        if (nextSyllable.nucleus.length === 1) {
+          return (
+            nextSyllable.nucleus +
+            nextSyllable.coda +
+            syllable2Str(lastSyllable)
+          );
+        } else {
+          let stressIndex = 0;
+          for (const char of nextSyllable.nucleus) {
+            if (STRESSED_VOWELS.has(char)) {
+              return (
+                nextSyllable.nucleus.slice(
+                  stressIndex,
+                  nextSyllable.nucleus.length
+                ) +
+                nextSyllable.coda +
+                syllable2Str(lastSyllable)
+              );
+            }
+            stressIndex += 1;
+          }
+          // Not possible
+          return (
+            nextSyllable.nucleus +
+            nextSyllable.coda +
+            syllable2Str(lastSyllable)
+          );
+        }
+      }
+      case Stress.Proparoxytone: {
+        const lastSyllable = this.syllables[this.syllables.length - 1];
+        const nextSyllable = this.syllables[this.syllables.length - 2];
+        const nnextSyllable = this.syllables[this.syllables.length - 3];
+        return (
+          nnextSyllable.nucleus +
+          nnextSyllable.coda +
+          syllable2Str(nextSyllable) +
+          syllable2Str(lastSyllable)
+        );
+      }
+      case Stress.Superproparoxytone: {
+        // What's the point
+        return this.word;
+      }
+      default: {
+        return this.word;
+      }
+    }
+  }
+}
+
+export enum SoundType {
+  Monophthong,
+  Diphthong,
+  Triphthong,
+  Hiatus,
+  Other,
+}
+
+export function classify(word: Word) {
+  console.log(word);
+  return [
+    { str: 'j', sound: SoundType.Other },
+    { str: 'au', sound: SoundType.Diphthong },
+    { str: 'l', sound: SoundType.Other },
+    { str: 'a', sound: SoundType.Monophthong },
+  ];
 }
