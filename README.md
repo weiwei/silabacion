@@ -2,13 +2,21 @@
 
 Separate Spanish words into syllables.
 
+- Typescript friendly
+- Object oriented
+
 ## Usage
 
 ```typescript
-import { Word, syllable2Str } from '../src';
+import { Word } from '../src';
 
 const word = new Word(combined);
 ```
+
+## Compare
+
+[silabas.js](https://github.com/vic/silabas.js) only separates syllables. and is GNU licensed.
+[silabajs](https://github.com/nicofrem/silabajs) More functional.
 
 ## Local Development
 
