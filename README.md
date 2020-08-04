@@ -2,43 +2,45 @@
 
 Separate Spanish words into syllables.
 
-- Typescript friendly
-- Object oriented
-
 ## Usage
 
 ```typescript
-import { Word } from '../src';
+import { Word, Stress } from '../src';
 
-const word = new Word(combined);
+const word = new Word('hispanófilo');
+console.log(word.word); // hispanófilo
+console.log(word.length); // 11
+console.log(word.syllables.length); // 5
+console.log(word.syllables[0]); // { onset: 'h', nucleus: 'i', coda: 's' }
+console.log(Stress[word.stress]); // Proparoxytone
+console.log(word.rhyme); // ófilo
+console.log(word.tonic); // { onset: 'f', nucleus: 'i', coda: '' }
+
+const word = new Word('aéreo');
+console.log(word.hiatuses);
+// [
+//   { syllableIndex: 0, composite: 'aé', type: 1 },
+//   { syllableIndex: 2, composite: 'eo', type: 0 }
+// ]
+console.log(word.diphthongs);
+// []
+console.log(word.triphthongs);
+// []
+
+// Note: diphthongs and hiatuses have a enum type attribute
+export enum HiatusType {
+  Simple,
+  Acentual,
+}
+
+export enum DiphthongType {
+  Creciente,
+  Decreciente,
+  Homogéneo,
+}
 ```
 
 ## Compare
 
-[silabas.js](https://github.com/vic/silabas.js) only separates syllables. and is GNU licensed.
-[silabajs](https://github.com/nicofrem/silabajs) More functional.
-
-## Local Development
-
-This project was bootstrapped with [TSDX](https://github.com/jaredpalmer/tsdx).
-Below is a list of commands you will probably find useful.
-
-### `yarn start`
-
-Runs the project in development/watch mode. Your project will be rebuilt upon changes. TSDX has a special logger for you convenience. Error messages are pretty printed and formatted for compatibility VS Code's Problems tab.
-
-<img src="https://user-images.githubusercontent.com/4060187/52168303-574d3a00-26f6-11e9-9f3b-71dbec9ebfcb.gif" width="600" />
-
-Your library will be rebuilt if you make edits.
-
-### `yarn build`
-
-Bundles the package to the `dist` folder.
-The package is optimized and bundled with Rollup into multiple formats (CommonJS, UMD, and ES Module).
-
-<img src="https://user-images.githubusercontent.com/4060187/52168322-a98e5b00-26f6-11e9-8cf6-222d716b75ef.gif" width="600" />
-
-### `yarn test`
-
-Runs the test watcher (Jest) in an interactive mode.
-By default, runs tests related to files changed since the last commit.
+[silabas.js](https://github.com/vic/silabas.js) only separates syllables. GNU licensed.
+[silabajs](https://github.com/nicofrem/silabajs) functionally comparable. It's in pure js instead of typescript.

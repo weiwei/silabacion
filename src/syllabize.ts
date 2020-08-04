@@ -19,25 +19,57 @@ export enum Stress {
 
 enum Position {
   None,
-  atOnset,
-  atNucleus,
-  atCoda,
+  atOnset, // Dos
+  atNucleus, // dOs
+  atCoda, // doS
 }
 
 export class Word {
-  public word: string;
-  public length: number;
-  public syllables: Syllable[];
-  public stress: Stress;
-  public rhyme: string;
   private stressPosition = 0;
+
+  /**
+   * The word itself
+   */
+  public word: string;
+
+  /**
+   * Length of the word
+   */
+  public length: number;
+
+  /**
+   * Word devided to syllables
+   */
+  public syllables: Syllable[];
+
+  /**
+   * Type of stress
+   */
+  public stress: Stress;
+
+  /**
+   * The rhyming part
+   */
+  public rhyme: string;
+
+  /**
+   * The tonic syllable
+   */
   public tonic: Syllable;
+
+  /**
+   * List of syllable indexes where the hiatus first occurred
+   */
+  public hiatuses: Hiatus[] = [];
+  public diphthongs: Diptong[] = [];
+  public triphthongs: Triphthong[] = [];
 
   constructor(word: string) {
     this.word = word;
     this.length = word.length;
     this.syllables = [];
     this.syllabize();
+    this.findVowelCombos();
     this.stress = this.findStress();
     this.rhyme = this.findRhyme();
     this.tonic = this.syllables[this.stressPosition];
@@ -54,7 +86,11 @@ export class Word {
           position = Position.atOnset;
           syllable.onset = syllable.onset + char;
         } else if (position === Position.atNucleus) {
-          if (index === this.length - 1 && char === 'y') {
+          if (
+            char === 'y' &&
+            (index === this.length - 1 ||
+              (index + 1 < this.word.length && !isVowel(this.word[index + 1])))
+          ) {
             syllable.nucleus = syllable.nucleus + char;
           } else if (char === 'h') {
             index += 1;
@@ -213,6 +249,63 @@ export class Word {
     return Stress.Paroxytone;
   }
 
+  private findVowelCombos(): void {
+    let index = 0;
+    while (index < this.syllables.length) {
+      if (
+        this.syllables[index].coda === '' &&
+        this.syllables[index].nucleus.length === 1 &&
+        index + 1 < this.syllables.length &&
+        (this.syllables[index + 1].onset === '' ||
+          this.syllables[index + 1].onset === 'h') &&
+        this.syllables[index + 1].nucleus.length === 1
+      ) {
+        // Find hiatuses
+        this.hiatuses.push({
+          syllableIndex: index,
+          composite:
+            this.syllables[index].nucleus + this.syllables[index + 1].nucleus,
+          type:
+            hasAccent(this.syllables[index]) ||
+            hasAccent(this.syllables[index + 1])
+              ? HiatusType.Acentual
+              : HiatusType.Simple,
+        });
+      } else if (this.syllables[index].nucleus.length === 2) {
+        // Find diptongs
+        let type;
+        if (this.syllables[index].nucleus.match(/[iíuúü][aáeéoó]/)) {
+          type = DiphthongType.Creciente;
+        } else if (this.syllables[index].nucleus.match(/[aáeéoó][iíuúüy]/)) {
+          type = DiphthongType.Decreciente;
+        } else if (this.syllables[index].nucleus.match(/[iíuúü][iíuúüy]/)) {
+          type = DiphthongType.Homogéneo;
+        } else {
+          throw new Error('Not a diphthong');
+        }
+        this.diphthongs.push({
+          syllableIndex: index,
+          type,
+          composite: this.syllables[index].nucleus,
+        });
+      } else if (this.syllables[index].nucleus.length === 3) {
+        this.triphthongs.push({
+          syllableIndex: index,
+          composite: this.syllables[index].nucleus,
+        });
+      } else if (
+        this.syllables[index].coda === '' &&
+        this.syllables[index].nucleus.length === 2 &&
+        index + 1 < this.syllables.length &&
+        (this.syllables[index + 1].onset === '' ||
+          this.syllables[index + 1].onset === 'h') &&
+        this.syllables[index + 1].nucleus.length === 1
+      ) {
+      }
+      index += 1;
+    }
+  }
+
   private findRhyme(): string {
     switch (this.stress) {
       case Stress.Oxytone: {
@@ -259,20 +352,30 @@ export class Word {
   }
 }
 
-export enum SoundType {
-  Monophthong,
-  Diphthong,
-  Triphthong,
-  Hiatus,
-  Other,
+export enum HiatusType {
+  Simple,
+  Acentual,
 }
 
-export function classify(word: Word) {
-  console.log(word);
-  return [
-    { str: 'j', sound: SoundType.Other },
-    { str: 'au', sound: SoundType.Diphthong },
-    { str: 'l', sound: SoundType.Other },
-    { str: 'a', sound: SoundType.Monophthong },
-  ];
+export enum DiphthongType {
+  Creciente,
+  Decreciente,
+  Homogéneo,
+}
+
+export interface Hiatus {
+  syllableIndex: number;
+  composite: string;
+  type: HiatusType;
+}
+
+export interface Diptong {
+  syllableIndex: number;
+  composite: string;
+  type: DiphthongType;
+}
+
+export interface Triphthong {
+  syllableIndex: number;
+  composite: string;
 }

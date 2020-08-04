@@ -76,10 +76,9 @@ const TRIPTONGOS = [
   'Guay-mas',
   'Huey-pox-tla',
   'Miau',
-  // No son triptongos
-  'lim-pia-ú-ñas',
-  'vi-ví-ais',
 ];
+
+const NO_TRIPTONGOS = ['lim-pia-ú-ñas', 'vi-ví-ais'];
 
 // Most from https://github.com/vic/silabas.js
 const TEST_DATA = [
@@ -110,6 +109,7 @@ const TEST_DATA = [
   'az-ca-pot-zal-co',
   'va-he-e',
   'pte-ra-sau-rio',
+  'por-que',
 ];
 
 const WITH_H = ['a-ni-hi-lar', 'ma-ri-hua-na'];
@@ -130,6 +130,8 @@ describe('separate properly', () => {
     it(`${combined} => ${word}`, () => {
       const word = new Word(combined);
       expect(word.syllables.map(syllable2Str)).toEqual(split);
+      expect(word.diphthongs.length).toBeGreaterThanOrEqual(1);
+      console.log(word.diphthongs);
     });
   });
 
@@ -139,6 +141,18 @@ describe('separate properly', () => {
     it(`${combined} => ${word}`, () => {
       const word = new Word(combined);
       expect(word.syllables.map(syllable2Str)).toEqual(split);
+      expect(word.triphthongs.length).toBeGreaterThanOrEqual(1);
+      console.log(word.triphthongs);
+    });
+  });
+
+  NO_TRIPTONGOS.forEach(word => {
+    const combined = word.replace(/-/g, '');
+    const split = word.split('-');
+    it(`${combined} => ${word}`, () => {
+      const word = new Word(combined);
+      expect(word.syllables.map(syllable2Str)).toEqual(split);
+      expect(word.triphthongs.length).toBeGreaterThanOrEqual(0);
     });
   });
 
@@ -148,6 +162,8 @@ describe('separate properly', () => {
     it(`${combined} => ${word}`, () => {
       const word = new Word(combined);
       expect(word.syllables.map(syllable2Str)).toEqual(split);
+      expect(word.hiatuses.length).toBeGreaterThanOrEqual(1);
+      console.log(word.hiatuses);
     });
   });
 
