@@ -42,5 +42,5 @@ export enum DiphthongType {
 
 ## Compare
 
-[silabas.js](https://github.com/vic/silabas.js) only separates syllables. GNU licensed.
-[silabajs](https://github.com/nicofrem/silabajs) functionally comparable. It's in pure js instead of typescript.
+- [silabas.js](https://github.com/vic/silabas.js) only separates syllables. GNU licensed.
+- [silabajs](https://github.com/nicofrem/silabajs) functionally comparable. It's in pure js instead of typescript.
