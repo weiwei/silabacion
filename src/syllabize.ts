@@ -24,6 +24,34 @@ enum Position {
   atCoda, // doS
 }
 
+export enum HiatusType {
+  Simple,
+  Acentual,
+}
+
+export enum DiphthongType {
+  Creciente,
+  Decreciente,
+  Homogéneo,
+}
+
+export interface Hiatus {
+  syllableIndex: number;
+  composite: string;
+  type: HiatusType;
+}
+
+export interface Diptong {
+  syllableIndex: number;
+  composite: string;
+  type: DiphthongType;
+}
+
+export interface Triphthong {
+  syllableIndex: number;
+  composite: string;
+}
+
 export class Word {
   private stressPosition = 0;
 
@@ -350,32 +378,4 @@ export class Word {
       }
     }
   }
-}
-
-export enum HiatusType {
-  Simple,
-  Acentual,
-}
-
-export enum DiphthongType {
-  Creciente,
-  Decreciente,
-  Homogéneo,
-}
-
-export interface Hiatus {
-  syllableIndex: number;
-  composite: string;
-  type: HiatusType;
-}
-
-export interface Diptong {
-  syllableIndex: number;
-  composite: string;
-  type: DiphthongType;
-}
-
-export interface Triphthong {
-  syllableIndex: number;
-  composite: string;
 }

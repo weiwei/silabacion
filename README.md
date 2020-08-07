@@ -5,7 +5,7 @@ Separate Spanish words into syllables.
 ## Usage
 
 ```typescript
-import { Word, Stress } from '../src';
+import { Word, Stress } from 'silabacion';
 
 const word = new Word('hispanófilo');
 console.log(word.word); // hispanófilo
