@@ -34,5 +34,13 @@
     "tsdx": "^0.13.2",
     "tslib": "^2.0.0",
     "typescript": "^3.9.7"
-  }
+  },
+  "keywords": [
+    "spanish",
+    "español",
+    "syllable",
+    "sílaba",
+    "word",
+    "palabra"
+  ]
 }
