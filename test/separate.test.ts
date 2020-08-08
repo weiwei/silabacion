@@ -131,7 +131,6 @@ describe('separate properly', () => {
       const word = new Word(combined);
       expect(word.syllables.map(syllable2Str)).toEqual(split);
       expect(word.diphthongs.length).toBeGreaterThanOrEqual(1);
-      console.log(word.diphthongs);
     });
   });
 
@@ -142,7 +141,6 @@ describe('separate properly', () => {
       const word = new Word(combined);
       expect(word.syllables.map(syllable2Str)).toEqual(split);
       expect(word.triphthongs.length).toBeGreaterThanOrEqual(1);
-      console.log(word.triphthongs);
     });
   });
 
@@ -163,7 +161,6 @@ describe('separate properly', () => {
       const word = new Word(combined);
       expect(word.syllables.map(syllable2Str)).toEqual(split);
       expect(word.hiatuses.length).toBeGreaterThanOrEqual(1);
-      console.log(word.hiatuses);
     });
   });
 

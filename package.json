@@ -1,6 +1,7 @@
 {
-  "version": "0.4.0",
+  "version": "0.4.1",
   "license": "MIT",
+  "homepage": "https://github.com/gastlygem/silabacion",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
