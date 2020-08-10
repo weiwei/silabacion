@@ -2,6 +2,8 @@
 
 Separate Spanish words into syllables.
 
+![build](https://github.com/gastlygem/silabacion/workflows/build/badge.svg)
+
 ## Installation
 
 As with any other NPM package, you can install it with `npm` or `yarn`.
