@@ -1,5 +1,4 @@
-import { Word } from '../src/syllabize';
-import { syllable2Str } from '../src/util';
+import { Word, syllable2Str } from '../src';
 
 describe('syllabize properly', () => {
   it('vc', () => {

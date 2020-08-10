@@ -1,4 +1,4 @@
-import { Word } from '../src/syllabize';
+import { Word } from '../src';
 
 describe('syllabize properly', () => {
   it('agudo', () => {

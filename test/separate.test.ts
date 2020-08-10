@@ -1,5 +1,4 @@
-import { Word } from '../src/syllabize';
-import { syllable2Str } from '../src/util';
+import { Word, syllable2Str } from '../src';
 
 const DIPTONGOS = [
   'pai-sa-je',
@@ -110,6 +109,11 @@ const TEST_DATA = [
   'va-he-e',
   'pte-ra-sau-rio',
   'por-que',
+  'abs-tra-er',
+  'cons-truir',
+  'ads-cri-bir',
+  'ads-trin-gir',
+  'ah-re',
 ];
 
 const WITH_H = ['a-ni-hi-lar', 'ma-ri-hua-na'];

@@ -1,4 +1,4 @@
-import { Word, Stress } from '../src/syllabize';
+import { Word, Stress } from '../src';
 
 const Oxytones = [
   'a',
