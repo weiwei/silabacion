@@ -2,7 +2,8 @@
 
 Separate Spanish words into syllables.
 
-![build](https://github.com/gastlygem/silabacion/workflows/build/badge.svg)
+![build-test](https://github.com/gastlygem/silabacion/workflows/build-test/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/gastlygem/silabacion/badge.svg?branch=master)](https://coveralls.io/github/gastlygem/silabacion?branch=master)
 
 ## Installation
 
