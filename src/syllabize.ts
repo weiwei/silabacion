@@ -25,14 +25,14 @@ enum Position {
 }
 
 export enum HiatusType {
-  Simple,
-  Acentual,
+  Simple = 'Simple',
+  Acentual = 'Acentual',
 }
 
 export enum DiphthongType {
-  Creciente,
-  Decreciente,
-  Homogéneo,
+  Creciente = 'Creciente',
+  Decreciente = 'Decreciente',
+  Homogéneo = 'Homogéneo',
 }
 
 export interface Hiatus {
