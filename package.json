@@ -31,7 +31,7 @@
   "module": "dist/silabacion.esm.js",
   "devDependencies": {
     "@types/jest": "^26.0.8",
-    "husky": "^4.2.5",
+    "husky": "^4.3.0",
     "tsdx": "^0.13.2",
     "tslib": "^2.0.0",
     "typescript": "^3.9.7"
