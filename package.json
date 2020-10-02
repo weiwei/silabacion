@@ -33,7 +33,7 @@
     "@types/jest": "^26.0.8",
     "husky": "^4.3.0",
     "tsdx": "^0.14.0",
-    "tslib": "^2.0.0",
+    "tslib": "^2.0.1",
     "typescript": "^3.9.7"
   },
   "keywords": [
