@@ -28,6 +28,7 @@ jobs:
         npm install -g yarn
         yarn
     - name: Run tests
+      run: |
         yarn lint
         yarn test --coverage
     - name: Upload coverage to Codecov
