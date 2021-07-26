@@ -30,9 +30,9 @@ export enum HiatusType {
 }
 
 export enum DiphthongType {
-  Creciente = 'Creciente',
-  Decreciente = 'Decreciente',
-  Homogéneo = 'Homogéneo',
+  Rising,
+  Falling,
+  Homogenous,
 }
 
 export interface Hiatus {
@@ -41,7 +41,7 @@ export interface Hiatus {
   type: HiatusType;
 }
 
-export interface Diptong {
+export interface Diphthong {
   syllableIndex: number;
   composite: string;
   type: DiphthongType;
@@ -89,7 +89,7 @@ export class Word {
    * List of syllable indexes where the hiatus first occurred
    */
   public hiatuses: Hiatus[] = [];
-  public diphthongs: Diptong[] = [];
+  public diphthongs: Diphthong[] = [];
   public triphthongs: Triphthong[] = [];
 
   constructor(word: string) {
@@ -173,15 +173,13 @@ export class Word {
             if (isHiatus(char, syllable.nucleus)) {
               this.syllables.push(syllable);
               syllable = { onset: '', nucleus: char, coda: '' };
-              position = Position.atNucleus;
             } else {
               syllable.nucleus = syllable.nucleus + char;
-              position = Position.atNucleus;
             }
+            position = Position.atNucleus;
           } else if (syllable.nucleus.length === 2) {
             if (makesTriphthong(syllable.nucleus, char)) {
               syllable.nucleus = syllable.nucleus + char;
-              position = Position.atNucleus;
             } else {
               const lastNucleus = syllable.nucleus[1];
               if (isWeakVowel(lastNucleus)) {
@@ -194,8 +192,8 @@ export class Word {
                 this.syllables.push(syllable);
                 syllable = { onset: '', nucleus: char, coda: '' };
               }
-              position = Position.atNucleus;
             }
+            position = Position.atNucleus;
           }
         } else if (position === Position.atCoda) {
           if (syllable.coda.length === 1) {
@@ -303,11 +301,11 @@ export class Word {
         // Find diptongs
         let type;
         if (this.syllables[index].nucleus.match(/[iíuúü][aáeéoó]/)) {
-          type = DiphthongType.Creciente;
+          type = DiphthongType.Rising;
         } else if (this.syllables[index].nucleus.match(/[aáeéoó][iíuúüy]/)) {
-          type = DiphthongType.Decreciente;
+          type = DiphthongType.Falling;
         } else if (this.syllables[index].nucleus.match(/[iíuúü][iíuúüy]/)) {
-          type = DiphthongType.Homogéneo;
+          type = DiphthongType.Homogenous;
         } else {
           throw new Error('Not a diphthong');
         }

@@ -4,7 +4,7 @@ export {
   Hiatus,
   HiatusType,
   DiphthongType,
-  Diptong,
+  Diphthong,
   Triphthong,
 } from './syllabize';
 
