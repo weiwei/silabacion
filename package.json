@@ -1,5 +1,5 @@
 {
-  "version": "0.5.0",
+  "version": "0.5.1",
   "license": "MIT",
   "homepage": "https://github.com/gastlygem/silabacion",
   "main": "dist/index.js",
@@ -30,11 +30,11 @@
   "author": "Joel Wang",
   "module": "dist/silabacion.esm.js",
   "devDependencies": {
-    "husky": "^7.0.4",
     "@types/jest": "^27.4.1",
-    "tsdx": "^0.14.1",
-    "typescript": "^4.6.2",
-    "tslib": "^2.3.1"
+    "dts-cli": "^1.4.0",
+    "husky": "^7.0.4",
+    "tslib": "^2.3.1",
+    "typescript": "^4.6.2"
   },
   "keywords": [
     "spanish",

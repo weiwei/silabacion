@@ -23,10 +23,6 @@ describe('syllabize properly', () => {
     const word = new Word('buey');
     expect(word.syllables).toEqual([{ coda: '', nucleus: 'uey', onset: 'b' }]);
   });
-  it('cvvy', () => {
-    const word = new Word('buey');
-    expect(word.syllables).toEqual([{ coda: '', nucleus: 'uey', onset: 'b' }]);
-  });
   it('vcvc', () => {
     const word = new Word('lalo');
     expect(word.syllables.map(syllable2Str)).toEqual(['la', 'lo']);

@@ -1,9 +1,9 @@
 import { Word } from '../src';
 
-describe('syllabize properly', () => {
+describe('gets rhyming parts', () => {
   it('agudo', () => {
     const word = new Word('pié');
-    expect(word.rhyme).toEqual('ié');
+    expect(word.rhyme).toEqual('é');
   });
   it('llano', () => {
     const word = new Word('ciento');
