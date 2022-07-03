@@ -74,7 +74,7 @@ export function isHiatus(a: string, b: string) {
   const bL = b.toLowerCase();
   return (
     // same vowel
-    SAME_VOWEL_SETS.some(s => s.has(aL) && s.has(bL)) ||
+    SAME_VOWEL_SETS.some((s) => s.has(aL) && s.has(bL)) ||
     // or both stressed
     (STRESSED_VOWELS.has(aL) && STRESSED_VOWELS.has(bL))
   );

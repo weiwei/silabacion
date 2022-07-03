@@ -31,28 +31,28 @@ const Superproparoxytone = [
 ];
 
 describe('stress', () => {
-  Oxytones.forEach(word => {
+  Oxytones.forEach((word) => {
     it(`${word} is oxytone`, () => {
       const obj = new Word(word);
       expect(obj.stress).toEqual(Stress.Oxytone);
     });
   });
 
-  Paroxytones.forEach(word => {
+  Paroxytones.forEach((word) => {
     it(`${word} is paroxytone`, () => {
       const obj = new Word(word);
       expect(obj.stress).toEqual(Stress.Paroxytone);
     });
   });
 
-  ProParoxytones.forEach(word => {
+  ProParoxytones.forEach((word) => {
     it(`${word} is proparoxytone`, () => {
       const obj = new Word(word);
       expect(obj.stress).toEqual(Stress.Proparoxytone);
     });
   });
 
-  Superproparoxytone.forEach(word => {
+  Superproparoxytone.forEach((word) => {
     it(`${word} is superproparoxytone`, () => {
       const obj = new Word(word);
       expect(obj.stress).toEqual(Stress.Superproparoxytone);

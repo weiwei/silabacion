@@ -25,12 +25,11 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
       run: |
-        npm install -g yarn
-        yarn
+        npm install
     - name: Run tests
       run: |
-        yarn lint
-        yarn test --coverage
+        npm run lint
+        npm run test --coverage
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:

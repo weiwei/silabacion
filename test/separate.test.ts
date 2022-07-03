@@ -119,7 +119,7 @@ const TEST_DATA = [
 const WITH_H = ['a-ni-hi-lar', 'ma-ri-hua-na'];
 
 describe('separate properly', () => {
-  TEST_DATA.forEach(word => {
+  TEST_DATA.forEach((word) => {
     const combined = word.replace(/-/g, '');
     const split = word.split('-');
     it(`${combined} => ${word}`, () => {
@@ -128,7 +128,7 @@ describe('separate properly', () => {
     });
   });
 
-  DIPTONGOS.forEach(word => {
+  DIPTONGOS.forEach((word) => {
     const combined = word.replace(/-/g, '');
     const split = word.split('-');
     it(`${combined} => ${word}`, () => {
@@ -138,7 +138,7 @@ describe('separate properly', () => {
     });
   });
 
-  TRIPTONGOS.forEach(word => {
+  TRIPTONGOS.forEach((word) => {
     const combined = word.replace(/-/g, '');
     const split = word.split('-');
     it(`${combined} => ${word}`, () => {
@@ -148,7 +148,7 @@ describe('separate properly', () => {
     });
   });
 
-  NO_TRIPTONGOS.forEach(word => {
+  NO_TRIPTONGOS.forEach((word) => {
     const combined = word.replace(/-/g, '');
     const split = word.split('-');
     it(`${combined} => ${word}`, () => {
@@ -158,7 +158,7 @@ describe('separate properly', () => {
     });
   });
 
-  HIATOS.forEach(word => {
+  HIATOS.forEach((word) => {
     const combined = word.replace(/-/g, '');
     const split = word.split('-');
     it(`${combined} => ${word}`, () => {
@@ -168,7 +168,7 @@ describe('separate properly', () => {
     });
   });
 
-  WITH_H.forEach(word => {
+  WITH_H.forEach((word) => {
     const combined = word.replace(/-/g, '');
     const split = word.split('-');
     it(`${combined} => ${word}`, () => {
