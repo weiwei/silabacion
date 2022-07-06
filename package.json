@@ -30,7 +30,7 @@
   "author": "Joel Wang",
   "module": "dist/silabacion.esm.js",
   "devDependencies": {
-    "@types/jest": "^27.4.1",
+    "@types/jest": "^28.1.4",
     "dts-cli": "^1.5.2",
     "husky": "^8.0.1",
     "tslib": "^2.4.0",
