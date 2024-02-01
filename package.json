@@ -14,7 +14,6 @@
     "lint": "dts lint",
     "prepare": "dts build"
   },
-  "peerDependencies": {},
   "husky": {
     "hooks": {
       "pre-commit": "dts lint"
@@ -31,10 +30,10 @@
   "module": "dist/silabacion.esm.js",
   "devDependencies": {
     "@types/jest": "^29.5.11",
-    "dts-cli": "^1.5.2",
+    "dts-cli": "^2.0.4",
     "husky": "^9.0.7",
     "tslib": "^2.6.2",
-    "typescript": "^4.9.5"
+    "typescript": "^5.3.3"
   },
   "keywords": [
     "spanish",
