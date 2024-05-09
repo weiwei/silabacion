@@ -30,7 +30,7 @@
   "module": "dist/silabacion.esm.js",
   "devDependencies": {
     "@types/jest": "^29.5.12",
-    "dts-cli": "^2.0.4",
+    "dts-cli": "^2.0.5",
     "husky": "^9.0.11",
     "tslib": "^2.6.2",
     "typescript": "^5.4.5"
